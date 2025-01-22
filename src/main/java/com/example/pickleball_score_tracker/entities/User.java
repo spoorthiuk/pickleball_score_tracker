@@ -18,7 +18,7 @@ import java.util.List;
 
 @Table(name = "users")
 @Entity
-public class User extends UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
