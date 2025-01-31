@@ -20,7 +20,7 @@ public class JwtService {
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 
-    @Value("${security.jwt.expiration-level}")
+    @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
 
     public String extractUsername(String token){
@@ -73,12 +73,13 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token){
-        return Jwts
-                .parserBuilder()
+        Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+        return claims;
+
     }
 
     private Key getSignInKey() {
